@@ -239,13 +239,13 @@
         </div>
     </div>
 
+    <!-- APP SCRIPT & SUPABASE CONNECTION -->
     <script>
         const SUPABASE_URL = 'https://ummxwhmunzmxuigpjphq.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtbXh3aG11bnpteHVpZ3BqcGhxIiwicm9sZSI6InVub24iLCJpYXQiOjE3OTE4ODMwODMsImV4cCI6MjEwNzQ1OTA4M30.MJUkQspRN1HMOrTNvvqqpsYDN5SGpnxCkAUcSAWCZ7Y';
         
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Vždy přesně aktuální reálný měsíc a rok zařízení
         let currentDate = new Date(); 
         let currentView = 'month'; 
         
