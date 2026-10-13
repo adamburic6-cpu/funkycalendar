@@ -59,7 +59,6 @@
             <h1 class="funky-title text-2xl md:text-4xl font-bold tracking-wider uppercase">FUNKY<span id="logoSubTag" class="bg-[#FF9770] text-black px-1.5 md:px-2 py-0.5 ml-1 border-2 border-black rounded-lg inline-block transform -rotate-2 text-xl md:text-3xl">CAL</span></h1>
         </div>
 
-        <!-- Controls: Views & Date Navigation (Desktop) -->
         <div class="hidden md:flex items-center gap-3">
             <div class="flex bg-gray-100 border-2 border-black rounded-xl p-1 brut-shadow-sm">
                 <button onclick="changeView('month')" id="btnViewMonth" class="px-3 py-1 font-bold text-sm rounded-lg bg-black text-white transition">Měsíc</button>
@@ -69,7 +68,7 @@
 
             <div class="flex items-center gap-2 border-2 border-black bg-white px-3 py-1.5 rounded-xl brut-shadow-sm">
                 <button onclick="navigateDate(-1)" class="font-bold px-2 py-0.5 bg-gray-100 border-2 border-black rounded hover:bg-gray-200 transition text-black">◀</button>
-                <span id="currentDateLabel" class="font-bold text-base min-w-[140px] text-center text-black">Leden 2026</span>
+                <span id="currentDateLabel" class="font-bold text-base min-w-[140px] text-center text-black">Načítám...</span>
                 <button onclick="navigateDate(1)" class="font-bold px-2 py-0.5 bg-gray-100 border-2 border-black rounded hover:bg-gray-200 transition text-black">▶</button>
             </div>
 
@@ -79,11 +78,10 @@
         <!-- Mobile Date Navigation -->
         <div class="flex md:hidden items-center gap-1 border-2 border-black bg-white px-2 py-1 rounded-xl brut-shadow-sm">
             <button onclick="navigateDate(-1)" class="font-bold px-2 py-1 bg-gray-100 border border-black rounded active:bg-gray-300 text-black">◀</button>
-            <span id="currentDateLabelMobile" class="font-bold text-xs min-w-[90px] text-center text-black truncate">Leden 2026</span>
+            <span id="currentDateLabelMobile" class="font-bold text-xs min-w-[90px] text-center text-black truncate">Načítám...</span>
             <button onclick="navigateDate(1)" class="font-bold px-2 py-1 bg-gray-100 border border-black rounded active:bg-gray-300 text-black">▶</button>
         </div>
 
-        <!-- Desktop Actions -->
         <div class="hidden md:flex items-center gap-3">
             <button onclick="openDesignStudio()" id="btnDesignStudio" class="px-3 py-2 font-bold text-sm bg-[#FFD670] text-black border-2 border-black rounded-xl brut-shadow flex items-center gap-1.5 hover:bg-[#ffcc4d]">
                 🎨 Design
@@ -94,9 +92,7 @@
         </div>
     </header>
 
-    <!-- Main Content Layout -->
     <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
-        <!-- Sidebar: Desktop only -->
         <aside id="sidebarRoot" class="hidden md:flex w-72 bg-white border-r-4 border-black p-5 flex-col gap-6 overflow-y-auto transition-colors">
             <div>
                 <h2 class="funky-title text-xl font-bold uppercase mb-3 flex items-center gap-2">
@@ -109,12 +105,11 @@
 
             <div id="dataBackupCard" class="mt-auto bg-gray-50 border-3 border-black p-4 rounded-xl brut-shadow-sm flex flex-col gap-3">
                 <h3 class="font-bold text-sm uppercase flex items-center gap-1.5"><span>☁️</span> Cloud Kalendář</h3>
-                <p class="text-xs text-gray-700">Data jsou bezpečně uložena v cloudu a sdílená pro všechny.</p>
+                <p class="text-xs text-gray-700">Data jsou synchronizována v reálném čase.</p>
                 <button onclick="loadEventsFromCloud()" class="w-full py-1.5 bg-[#FFD670] text-black text-xs font-bold rounded-lg border-2 border-black hover:bg-[#ffcc4d] transition">🔄 Obnovit data</button>
             </div>
         </aside>
 
-        <!-- Calendar Grid Area -->
         <div id="calendarContainer" class="flex-1 flex flex-col overflow-y-auto p-2 md:p-6 transition-colors"></div>
     </main>
 
@@ -154,7 +149,7 @@
         </div>
     </div>
 
-    <!-- ================= MODAL: CREATE / EDIT EVENT ================= -->
+    <!-- MODAL: EVENT -->
     <div id="eventModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 md:p-4">
         <div class="bg-white text-black border-4 border-black rounded-2xl p-5 md:p-6 w-full max-w-md brut-shadow flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b-2 border-black pb-3">
@@ -167,8 +162,7 @@
                 
                 <div class="flex flex-col gap-1">
                     <label class="font-bold text-xs md:text-sm uppercase">Název události *</label>
-                    <input type="text" id="eventTitle" required placeholder="např. Narozeninová párty 🎂" 
-                           class="border-2 border-black px-3 py-2 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-black font-medium">
+                    <input type="text" id="eventTitle" required placeholder="např. Narozeninová párty 🎂" class="border-2 border-black px-3 py-2 rounded-xl bg-gray-50 text-black font-medium">
                 </div>
 
                 <div class="flex flex-col gap-1">
@@ -209,7 +203,7 @@
         </div>
     </div>
 
-    <!-- ================= MODAL: DESIGN STUDIO ================= -->
+    <!-- MODAL: DESIGN STUDIO -->
     <div id="designModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3 md:p-4">
         <div class="bg-white text-black border-4 border-black rounded-2xl p-5 md:p-6 w-full max-w-lg brut-shadow flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b-2 border-black pb-3">
@@ -239,35 +233,19 @@
                 </div>
             </div>
 
-            <hr class="border-2 border-black border-dashed">
-
-            <div class="flex flex-col gap-3">
-                <label class="font-bold text-xs md:text-sm uppercase">Správa kategorií & barev</label>
-                <div id="categoryEditList" class="flex flex-col gap-2 max-h-40 overflow-y-auto pr-1"></div>
-
-                <div class="bg-gray-50 border-2 border-black p-2.5 rounded-xl flex items-center gap-2 mt-1">
-                    <input type="text" id="newCatName" placeholder="Název nové kategorie" class="border-2 border-black px-2 py-1 rounded-lg bg-white text-xs font-medium flex-1 text-black">
-                    <input type="color" id="newCatColor" value="#FF70A6" class="w-8 h-8 border-2 border-black rounded-lg cursor-pointer p-0.5 bg-white">
-                    <button onclick="addNewCategory()" class="px-3 py-1 bg-black text-white text-xs font-bold rounded-lg border-2 border-black">Přidat</button>
-                </div>
-            </div>
-
             <div class="flex justify-end pt-1">
                 <button onclick="closeDesignStudio()" class="px-5 py-2 bg-[#FF70A6] text-black font-bold border-2 border-black rounded-xl brut-shadow text-sm">Hotovo</button>
             </div>
         </div>
     </div>
 
-    <!-- Application Script with Supabase Integration -->
     <script>
-        // --- SUPABASE CONFIGURATION ---
         const SUPABASE_URL = 'https://ummxwhmunzmxuigpjphq.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtbXh3aG11bnpteHVpZ3BqcGhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4ODMwODMsImV4cCI6MjEwNzQ1OTA4M30.MJUkQspRN1HMOrTNvvqqpsYDN5SGpnxCkAUcSAWCZ7Y';
         
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // --- STATE ---
-        let currentDate = new Date();
+        let currentDate = new Date(); // Vždy aktuální datum zařízení
         let currentView = 'month'; 
         
         const availableIcons = ['🎉', '☕', '🚗', '🎂', '✈️', '🔥', '🛒', '💼', '🍸', '❤️', '🐶', '🍕'];
@@ -282,7 +260,6 @@
         let events = [];
         let currentTheme = localStorage.getItem('funky_theme') || 'summertime';
 
-        // --- INIT ---
         window.addEventListener('DOMContentLoaded', async () => {
             applyTheme(currentTheme);
             renderIconPicker();
@@ -290,17 +267,16 @@
             renderCategorySelects();
             renderCategoryEditList();
             
-            // Načtení dat z cloudu
             await loadEventsFromCloud();
             setupRealtimeSubscription();
         });
 
-        // --- SUPABASE CLOUD SYNC ---
         async function loadEventsFromCloud() {
             try {
                 const { data, error } = await supabaseClient.from('events').select('*');
                 if (error) {
                     console.error('Chyba při načítání z cloudu:', error);
+                    alert('Chyba při komunikaci se Supabase: ' + error.message);
                 } else {
                     events = data || [];
                     renderCalendar();
@@ -319,7 +295,6 @@
                 .subscribe();
         }
 
-        // --- MOBILE MENU ---
         function toggleMobileMenu() {
             document.getElementById('mobileDrawer').classList.toggle('hidden');
         }
@@ -328,7 +303,6 @@
             document.getElementById('mobileDrawer').classList.add('hidden');
         }
 
-        // --- ICON PICKER ---
         function renderIconPicker() {
             const container = document.getElementById('iconPickerContainer');
             container.innerHTML = '';
@@ -347,7 +321,6 @@
             });
         }
 
-        // --- NAVIGATION & VIEWS ---
         function changeView(view) {
             currentView = view;
             ['month', 'week', 'day'].forEach(v => {
@@ -379,7 +352,6 @@
             renderCalendar();
         }
 
-        // --- CALENDAR RENDERER ---
         function renderCalendar() {
             updateDateLabel();
             const container = document.getElementById('calendarContainer');
@@ -416,7 +388,6 @@
             return events.filter(e => activeCatIds.includes(e.category));
         }
 
-        // --- MONTH VIEW ---
         function renderMonthView(container) {
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
@@ -462,13 +433,9 @@
                 const cell = document.createElement('div');
                 
                 let cellBgClass = 'bg-white text-black hover:bg-yellow-50';
-                if (currentTheme === 'sexy_time') {
-                    cellBgClass = 'bg-[#1a0006] text-white hover:bg-[#33000c]';
-                } else if (currentTheme === 'funky_pop') {
-                    cellBgClass = 'bg-[#f8f0ff] text-black hover:bg-[#eedbff]';
-                } else if (currentTheme === 'larinka_swag') {
-                    cellBgClass = 'bg-[#faf6f0] text-black hover:bg-[#f0e8dc]';
-                }
+                if (currentTheme === 'sexy_time') cellBgClass = 'bg-[#1a0006] text-white hover:bg-[#33000c]';
+                else if (currentTheme === 'funky_pop') cellBgClass = 'bg-[#f8f0ff] text-black hover:bg-[#eedbff]';
+                else if (currentTheme === 'larinka_swag') cellBgClass = 'bg-[#faf6f0] text-black hover:bg-[#f0e8dc]';
 
                 cell.className = `${cellBgClass} p-1 flex flex-col gap-0.5 overflow-y-auto cursor-pointer transition min-h-[65px] md:min-h-[85px]`;
                 if (dateStr === todayStr) {
@@ -530,7 +497,6 @@
             container.appendChild(gridWrapper);
         }
 
-        // --- WEEK VIEW ---
         function renderWeekView(container) {
             const curr = new Date(currentDate);
             const firstdayOfWeek = new Date(curr.setDate(curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1)));
@@ -601,7 +567,6 @@
             container.appendChild(gridWrapper);
         }
 
-        // --- DAY VIEW ---
         function renderDayView(container) {
             const dateStr = currentDate.toISOString().split('T')[0];
             const activeEvents = getFilteredEvents().filter(e => e.date === dateStr);
@@ -658,7 +623,6 @@
             container.appendChild(wrapper);
         }
 
-        // --- CATEGORIES & FILTERS ---
         function renderCategoryFilters() {
             const container = document.getElementById('categoryFilters');
             const containerMobile = document.getElementById('categoryFiltersMobile');
@@ -704,7 +668,6 @@
                 row.innerHTML = `
                     <input type="color" value="${cat.color}" onchange="updateCatColor('${cat.id}', this.value)" class="w-6 h-6 border border-black rounded cursor-pointer p-0 bg-white">
                     <input type="text" value="${cat.name}" onchange="updateCatName('${cat.id}', this.value)" class="border border-black px-2 py-0.5 text-xs rounded font-medium flex-1 bg-gray-50 text-black">
-                    <button onclick="deleteCategory('${cat.id}')" class="px-2 py-0.5 bg-[#FF0055] text-white text-xs font-bold rounded border border-black">✕</button>
                 `;
                 container.appendChild(row);
             });
@@ -728,36 +691,6 @@
             }
         }
 
-        function addNewCategory() {
-            const nameInput = document.getElementById('newCatName');
-            const colorInput = document.getElementById('newCatColor');
-            const name = nameInput.value.trim();
-
-            if (!name) return;
-
-            const newId = 'cat_' + Date.now();
-            categories.push({ id: newId, name: name, color: colorInput.value, active: true });
-
-            nameInput.value = '';
-            renderCategoryFilters();
-            renderCategorySelects();
-            renderCategoryEditList();
-            renderCalendar();
-        }
-
-        function deleteCategory(id) {
-            if (categories.length <= 1) {
-                alert('Musí zůstat alespoň jedna kategorie!');
-                return;
-            }
-            categories = categories.filter(c => c.id !== id);
-            renderCategoryFilters();
-            renderCategorySelects();
-            renderCategoryEditList();
-            renderCalendar();
-        }
-
-        // --- EVENT MODAL & CRUD (SUPABASE SYNCED) ---
         function openEventModal(dateStr = null, eventId = null) {
             const modal = document.getElementById('eventModal');
             const form = document.getElementById('eventForm');
@@ -807,16 +740,12 @@
             const category = document.getElementById('eventCategory').value;
             const description = document.getElementById('eventDescription').value;
 
-            const eventData = {
-                title, icon, date, time, category, description
-            };
+            const eventData = { title, icon, date, time, category, description };
 
             if (id) {
-                // Update
                 const { error } = await supabaseClient.from('events').update(eventData).eq('id', id);
                 if (error) alert('Chyba při úpravě: ' + error.message);
             } else {
-                // Insert
                 eventData.id = 'ev_' + Date.now();
                 const { error } = await supabaseClient.from('events').insert([eventData]);
                 if (error) alert('Chyba při ukládání: ' + error.message);
@@ -839,7 +768,6 @@
             }
         }
 
-        // --- DESIGN STUDIO & THEMES ---
         function openDesignStudio() {
             document.getElementById('designModal').classList.remove('hidden');
         }
